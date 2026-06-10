@@ -1,33 +1,29 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import { db } from "./db";
 
 const typeDefs = `#graphql
 
-  type Book {
-    title: String
-    author: String
+  type Product {
+    id: ID!
+    name: String
+    image: String
+    description: String
+    price: Float
+    quantity: Int
+    onStock: Boolean
+    categoryId: String
   }
 
   
   type Query {
-    books: [Book]
+    products: [Product]
   }
 `;
 
-const books = [
-  {
-    title: "The Awakening",
-    author: "Kate Chopin",
-  },
-  {
-    title: "City of Glass",
-    author: "Paul Auster",
-  },
-];
-
 const resolvers = {
   Query: {
-    books: () => books,
+    products: () => db.products,
   },
 };
 
