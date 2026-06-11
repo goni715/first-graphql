@@ -18,12 +18,18 @@ const typeDefs = `#graphql
   
   type Query {
     products: [Product]
+    product(productId: ID!): Product
   }
 `;
 
 const resolvers = {
   Query: {
     products: () => db.products,
+    product: (parent: any, args: { productId: string }, context: any) => {
+      //console.log(parent, args, context);
+      const result = db.products.find((p) => p.id === args.productId);
+      return result;
+    },
   },
 };
 
@@ -32,8 +38,11 @@ const server = new ApolloServer({
   resolvers,
 });
 
-const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
-});
+async function startServer() {
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: 4000 },
+  });
+  console.log(`🚀  Server ready at: ${url}`);
+}
 
-console.log(`🚀  Server ready at: ${url}`);
+startServer();

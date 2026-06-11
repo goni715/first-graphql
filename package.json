@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "type": "module",
   "scripts": {
-    "compile": "tsc",
-    "start": "npm run compile && node ./dist/index.js"
+    "compile": "tsc --w",
+    "start": "npm run compile && node ./dist/index.js",
+    "dev": "nodemon ./dist/index.js"
   },
   "dependencies": {
     "@apollo/server": "^5.5.0",
     "@types/node": "^25.6.0",
     "graphql": "^16.13.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
