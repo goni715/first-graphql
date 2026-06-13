@@ -18,6 +18,12 @@ export const resolvers = {
     category: (parent: any, args: any, context: any) => {
       //console.log(parent.categoryId);
       const result = db.categories.find((c) => c.id === parent.categoryId);
+      const reviews = db.reviews.filter((review)=>review.productId === parent.id)
+      return result;
+    },
+    reviews: (parent: any, args: any, context: any) => {
+      //console.log(parent.id);//productId
+      const result = db.reviews.filter((review)=>review.productId === parent.id)
       return result;
     },
   },
