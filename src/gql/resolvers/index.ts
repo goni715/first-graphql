@@ -14,4 +14,11 @@ export const resolvers = {
       return result;
     },
   },
+  Product: {
+    category: (parent, args, context) => {
+      //console.log(parent.categoryId);
+      const result = db.categories.find(c=> c.id===parent.categoryId);
+      return result;
+    },
+  },
 };

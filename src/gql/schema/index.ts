@@ -9,6 +9,7 @@ export const typeDefs = `#graphql
     quantity: Int
     onStock: Boolean
     categoryId: String
+    category: Category
   }
 
   type Category {
